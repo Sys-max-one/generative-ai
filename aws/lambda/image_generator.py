@@ -87,6 +87,5 @@ def lambda_handler(event, context):
     print(s3_presigned_url)
 
     return {
-        'statusCode': 200,
-        'body': s3_presigned_url
+        'image': s3_presigned_url
     }
