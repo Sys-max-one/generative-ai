@@ -86,6 +86,23 @@ def lambda_handler(event, context):
 
     print(s3_presigned_url)
 
+    content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Stable Diffusion</title>
+    </head>
+    <body>
+        <h1>Stable Diffusion</h1>
+        <p>Input: {input_prompt}</p>
+        <img src="{s3_presigned_url}" alt="Stable Diffusion Image">
+    </body>
+    </html>
+    """
     return {
-        'image': s3_presigned_url
+            "statusCode": 200,
+            "body": content,
+            "headers": {
+                'Content-Type': 'text/html'
+            }
     }
