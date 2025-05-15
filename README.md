@@ -5,9 +5,28 @@ A serverless Generative AI service that leverages **Amazon Bedrock**, **AWS Lamb
 ## ✨ Overview
 
 This project enables users to generate AI-powered sketches based on their text input (prompt). The generated image is stored securely in S3 using a pre-signed URL and is accessible through a public API endpoint.
+Visit the live API by replacing your prompt at the end of this URL:
 
 * 🔗 Live Endpoint:
   [`https://dsb2zwz7pk.execute-api.us-east-1.amazonaws.com/dev/ai/sketch?prompt=WHAT_YOU_WANT_TO_SKETCH_TODAY`](https://dsb2zwz7pk.execute-api.us-east-1.amazonaws.com/dev/ai/sketch?prompt=WHAT_YOU_WANT_TO_SKETCH_TODAY)
+
+✅ The image will be rendered in your browser.
+
+## 🧪 Example Prompts
+
+* *A robot sketching on paper*
+* *An astronaut riding a horse in space*
+
+### 🚀 How It Works
+
+1. **User** sends a `prompt` to the REST API endpoint.
+2. **API Gateway** triggers an **AWS Lambda** function.
+3. Lambda:
+
+   * Sends the prompt to **Amazon Bedrock (Stability-AI)** for image generation.
+   * Stores the image using a **pre-signed S3 URL**.
+   * Returns the image directly as part of the **HTTP response**, which the browser renders inline.
+4. The user **sees the generated image immediately** in the browser.
 
 ## 🧰 Tech Stack
 
@@ -26,26 +45,6 @@ This project enables users to generate AI-powered sketches based on their text i
 * ✅ Stateless RESTful API with Lambda-backed logic
 * ✅ Seamless integration with Bedrock & Stability-AI
 
-## 📦 API Usage
-
-**Endpoint:**
-
-```
-GET /dev/ai/sketch?prompt=YOUR_DESCRIPTION
-```
-
-**Example:**
-
-```
-https://dsb2zwz7pk.execute-api.us-east-1.amazonaws.com/dev/ai/sketch?prompt=A futuristic city at night
-```
-
-**Response:**
-
-```json
-{"image": "https://genposterdesign.s3.amazonaws.com/gen-StabilityAI...&Expires=..."}
-```
-
 ## 🔐 IAM & Security
 
 * **Lambda Execution Role:** Allows invoking Bedrock and uploading to S3.
@@ -53,7 +52,4 @@ https://dsb2zwz7pk.execute-api.us-east-1.amazonaws.com/dev/ai/sketch?prompt=A fu
 * **Least Privilege:** IAM roles follow best practices for secure access.
 
 
-## 🧪 Example Prompts
 
-* *A robot sketching on paper*
-* *An astronaut riding a horse in space*
